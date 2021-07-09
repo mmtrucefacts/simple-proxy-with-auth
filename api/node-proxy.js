@@ -7,8 +7,9 @@ var keys = ['keyboard cat'];
 
 // Create a proxy server with custom application logic
 const proxy = httpProxy.createProxyServer({changeOrigin: true, autoRewrite: true, hostRewrite: true, followRedirects: true});
-const envORIGIN = process.env.ORIGIN;
-var origin = (envORIGIN && envORIGIN != '') ? envORIGIN:'https://www.google.com';//默认值
+const envORIGIN = 'https://www.baidu.com';//a normal website
+const defaulturl = 'https://www.google.com';// a default target
+var origin = envORIGIN;//默认值
 
 const server = http.createServer(function(req, res) {
 
@@ -49,7 +50,7 @@ const server = http.createServer(function(req, res) {
   var cookies = new Cookies(req, res, { keys: keys });
   if(req && req.url.substring(0,3).toUpperCase() == '/F/'){
     //更改目标
-     var targeturl = envORIGIN;//默认url
+     var targeturl = defaulturl;//默认url default url
      var inurl = req.url.substring(3);
      
     if(inurl.substring(0,4).toUpperCase() == 'HTTP' ) {      
