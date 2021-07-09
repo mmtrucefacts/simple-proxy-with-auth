@@ -20,6 +20,7 @@ const server = http.createServer(function(req, res) {
 //   const password = process.env.PASSWORD;
 //   const username = process.env.USERNAME;
   
+  //u can change the auth info
   const password = '123456';//默认密码
   var username = 'admin';//用户名是网址
   
@@ -55,13 +56,13 @@ const server = http.createServer(function(req, res) {
     //更改目标
      var targeturl = 'https://www.google.com';//默认url
      var inurl = req.url.substring(3);
-     console.log('目标:',inurl);
+     //console.log('目标:',inurl);
     if(inurl.substring(0,4).toUpperCase() == 'HTTP' ) {      
       //把丢失的/找回来
       inurl = inurl.replace('https:/','https://');
       inurl = inurl.replace('http:/','http://');
       targeturl = inurl;
-      console.log('开始变:',targeturl);
+      //console.log('开始变:',targeturl);
     }
      cookies.set('lastorigin', targeturl, { signed: true,maxAge:0 }); //永久有效 
      res.statusCode = 200;
@@ -98,6 +99,6 @@ server.listen(port);
 
 
 const isAuthed = function (credentials, username, password) {
-    //return credentials.name === username && credentials.pass === password;
-  return credentials.pass === password;
+    return credentials.name === username && credentials.pass === password;
+  //return credentials.pass === password;
 }
