@@ -9,8 +9,6 @@ var keys = ['keyboard cat'];
 const proxy = httpProxy.createProxyServer({changeOrigin: true, autoRewrite: true, hostRewrite: true, followRedirects: true});
 const envORIGIN = process.env.ORIGIN;
 var origin = (envORIGIN && envORIGIN != '') ? envORIGIN:'https://www.google.com';//默认值
-var cacheorigin;
-
 
 const server = http.createServer(function(req, res) {
 
@@ -43,8 +41,7 @@ const server = http.createServer(function(req, res) {
     
     proxyRes.headers['x-proxy'] = "simple-basic-http-auth-proxy-vercel";
         
-    proxyRes.headers['x-proxy-domain'] = origin;
-    
+    proxyRes.headers['x-proxy-domain'] = origin;    
     
   });
   
@@ -74,8 +71,7 @@ const server = http.createServer(function(req, res) {
   }
   
   var lastorigin = cookies.get('lastorigin', { signed: true });
-  console.log('65 lastcookie==',lastorigin);
-  
+    
   if(lastorigin && (lastorigin.indexOf('://') != -1)){
     origin = lastorigin
   } 
